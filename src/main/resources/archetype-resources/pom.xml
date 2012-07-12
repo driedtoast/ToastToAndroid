@@ -1,15 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>$org.driedtoast</groupId>
-  <artifactId>$ToastToAndroid</artifactId>
-  <version>$1.0-SNAPSHOT</version>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<packaging>apk</packaging>
+	<name>${CompanyName} App</name>
+	<url>http://${CompanyDomain}</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.6</maven.compiler.source>
+		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.optimize>true</maven.compiler.optimize>
+		<android.version>2.3.3</android.version>
+		<cordova.version>1.7.0</cordova.version>
+		<android-plugin-version>3.2.0</android-plugin-version>
+		<!--KeyStore short filename path.指定KeyStore所在-->
+		<keystore>${project.build.directory}\sign.jks</keystore>    
+	</properties>
+  
+  <repositories>
+    <repository>
+      <id>gwtrepo</id>
+      <name>Kent's Repository</name>
+      <url>http://gwtrepo.googlecode.com/svn/repo</url>
+    </repository>
+  </repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>${android.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>cordova</groupId>
+			<artifactId>cordova</artifactId>
+			<version>${cordova.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+										<artifactId>android-maven-plugin</artifactId>
+										<versionRange>${android-plugin-version}</versionRange>
+										<goals>
+											<goal>proguard</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<inherited>true</inherited>
+					<configuration>
+						<sign>
+							<debug>false</debug>
+						</sign>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	  
+	  <!--http://maven-android-plugin-m2site.googlecode.com/svn/plugin-info.html-->
+		<plugins>
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>${android-plugin-version}</version>
+				<executions>
+				  <execution>
+				    <id>alignApk</id>
+				    <phase>install</phase>
+				    <goals>
+				      <goal>zipalign</goal>
+				    </goals>
+				  </execution>
+          <!--Enabled emulator immediately after install;若要這個Plugin執行一執行就啟動模擬器，把下面這段dismark--> 
+				  <!--execution>
+            <id>startEmulator</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>emulator-start</goal>
+            </goals>
+          </execution-->
+        </executions>
+				<configuration>
+					<sdk>
+						<platform>${platform}</platform>
+					</sdk>
+					<!--Choose device:either emulator or usb;選擇使用連接之裝置為 emulator 或是 usb-->
+					<device>emulator</device>  
+					<!--Configure emulator;設定模擬器
+					  emulator setup;設定 <avd>Name;模擬器名稱</avd> <wait>wait(ms) for startup;等待啟動時間(ms)</wait> 
+						<options>startup parameter;啟動參數如-no-skin</options>-->
+					<emulator>
+            <avd>${emulator_name}</avd>
+            <wait>10000</wait>
+            <options>-no-skin</options>
+          </emulator>
+					<!-- Proguard Configuration file locaiton;Proguard 設定 -->
+					<proguard>
+						<skip>false</skip>
+						<config>${basedir}\proguard.cfg</config>
+						<jvmArguments>
+							<jvmArgument>-Xms256m</jvmArgument>
+							<jvmArgument>-Xmx512m</jvmArgument>
+						</jvmArguments>
+					</proguard>
+				</configuration>
+				<extensions>true</extensions>
+			</plugin>                                      
+      <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>keytool-maven-plugin</artifactId>
+          <version>1.2</version>
+          <executions>
+              <execution>
+                  <phase>generate-resources</phase>
+                  <id>clean</id>
+                  <goals>
+                      <goal>clean</goal>
+                  </goals>
+              </execution>
+              <execution>
+                  <phase>generate-resources</phase>
+                  <id>genkey</id>
+                  <goals>
+                      <goal>generateKeyPair</goal>
+                  </goals>
+              </execution>
+          </executions>
+          <configuration>
+              <keystore>${keystore}</keystore>
+              <dname>cn=${CompanyDomain}</dname>
+              <storepass>changeit</storepass>
+              <!--keypass>${key.pass}</keypass-->
+              <alias>${CompanyDomain}</alias>
+              <keyalg>RSA</keyalg>
+              <validity>36525</validity>
+              <verbose>true</verbose>
+          </configuration>
+      </plugin>
+			
+			<!--http://maven.apache.org/plugins/maven-jarsigner-plugin/sign-mojo.html-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jarsigner-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>signing</id>
+						<phase>install</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+						<inherited>true</inherited>
+						<configuration>
+							<archiveDirectory></archiveDirectory>
+							<includes>
+								<include>${project.build.directory}/*.apk</include>
+							</includes>
+							<keystore>${keystore}</keystore>
+							<storepass>changeit</storepass>
+							<!--keypass>Password;密碼</keypass -->
+							<alias>${CompanyDomain}</alias>
+							<storetype>jks</storetype>
+							<verbose>true</verbose>   
+							<!--JDK 7 required parameters;JDK 7必下參數-->
+						  <arguments>
+								<argument>-sigalg</argument><argument>MD5withRSA</argument>
+								<argument>-digestalg</argument><argument>SHA1</argument>
+							</arguments>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

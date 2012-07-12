@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=no"/>
+    <title>${CompanyName} Android App</title>
+	  <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+	  <script type="text/javascript" charset="utf-8"><!--
+	      window.onload=function(){
+            document.addEventListener("deviceready", onDeviceReady, false)
+        }; 
+	      function onDeviceReady() {
+	          if(device.platform=="Android"||device.platform=="BlackBerry"){
+	              document.addEventListener("backbutton", function(){
+	                  navigator.app.exitApp();
+	              })
+            }
+	          checkConnection();
+	      }
+	      function checkConnection(){
+	          var networkState = navigator.network.connection.type;
+	          if(Connection.NONE==networkState){
+	               document.getElementById("loading").style.display="none";
+	               document.getElementById("msg").innerHTML = "<div style=\"color:red;font-weight:bold\">Must connect ${CompanyName}, network access is required.</div>";
+            }else{
+                 var xhr = new XMLHttpRequest();
+                 var url = "http://${CompanyDomain}${touchUrl}";
+                 xhr.open('GET', url, true);
+                 xhr.onerror = function(e){
+                     document.getElementById("loading").style.display="none";
+                     document.getElementById("msg").innerHTML = "<div style=\"color:red;font-weight:bold\">Connect ${CompanyName} failed:status("+e.target.status+":"+e.target.statusText+")</div>";
+                 }
+                 xhr.onreadystatechange = function(){
+                    if (xhr.readyState == 4){
+                        if (xhr.status == 200){
+                        	document.getElementById("msg").innerHTML = "<div style=\"color:blue;font-weight:bold\">Connectd,Loading page...</div>";
+                           navigator.app.loadUrl("http://${CompanyDomain}${mobilePageEntryUrl}");
+                           //window.plugins.childBrowser.showWebPage("http://${CompanyDomain}${mobilePageEntryUrl}", { showLocationBar: false });
+                        }else{
+                           document.getElementById("loading").style.display="none";
+                           if(xhr.status==0)
+                               document.getElementById("msg").innerHTML = "<div style=\"color:red;font-weight:bold\">Connect ${CompanyName} failed</div>";
+                           else
+                               document.getElementById("msg").innerHTML = "<div style=\"color:red;font-weight:bold\">Connect ${CompanyName} failed:status["+xhr.status+":"+xhr.statusText+"]</div>";
+                        }
+                     }
+               };
+               xhr.send();
+            }
+        }
+    --></script>
+    <style type="text/css"><!--
+      #msg {font-weight:bold;font-size:16pt;color:skyblue}
+    --></style>
+  </head>
+  <body>
+	   <div align="center"><img src="logo.png"></div>
+	   <div id="loading" align="center"><img src="loading.gif"></div>
+	   <div id="msg" align="center">Connecting ${CompanyName}...</div>
+  </body>
+</html>

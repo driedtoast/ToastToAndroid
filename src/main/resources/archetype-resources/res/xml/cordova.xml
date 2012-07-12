@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phonegap>
+    <!--access origin="http://127.0.0.1*"/>
+    <access origin="http://code.jquery.com/*"/>
+    <access origin="http://maps.google.com/*"/>
+    <access origin="http://googleapis.com/*" subdomains="true"/>
+    <access origin="http://jquery-ui-map.googlecode.com/*"/>
+    <access origin="http://maps.gstatic.com/*"-->
+    <access origin=".*"/> 
+    <log level="DEBUG"/>
+</phonegap>
