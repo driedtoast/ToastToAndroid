@@ -3,6 +3,14 @@ h1. Overview
 
 Maven architype for cordova/phonegap project creation. Initially pouched from "gwtrepo - cordova-android-quickstart":https://code.google.com/p/gwtrepo/source/browse/#svn%2Frepo%2Fcom%2Fgoogle%2Fcode%2Fcordova-android-quickstart%2F1.7.0
 
+Building: 
+* mvn -DaltDeploymentRepository=snapshot-repo::default::file:../kitchen-repo/snapshots clean deploy
+
+Using:
+
+@mvn archetype:generate -DarchetypeRepository=https://raw.github.com/driedtoast/kitchen-repo/master/snapshots -DarchetypeGroupId=org.driedtoast -DarchetypeArtifactId=ToastToAndroid  -DarchetypeVersion=1.0-SNAPSHOT@
+
+
 h2. Direction
 
 A couple of things I want to do with this would be:
