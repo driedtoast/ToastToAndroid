@@ -1,0 +1,47 @@
+
+h1. Overview
+
+Maven architype for cordova/phonegap project creation. Initially pouched from "gwtrepo - cordova-android-quickstart":https://code.google.com/p/gwtrepo/source/browse/#svn%2Frepo%2Fcom%2Fgoogle%2Fcode%2Fcordova-android-quickstart%2F1.7.0
+
+h2. Direction
+
+A couple of things I want to do with this would be:
+* integrate coffeescript build into a compile goal
+* integrate sass build into a compile goal
+* integrate a couple of random web frameworks as the base of use, still deciding on the mix
+** Css frameworks to consider:
+*** "Bourbon":http://thoughtbot.com/bourbon
+** Javascript frameworks to consider:
+*** "Node restify":http://mcavage.github.com/node-restify/
+*** "Sequelizejs":http://sequelizejs.com/
+*** "NowJS":http://nowjs.com/
+*** "Mibbu":https://github.com/michalbe/mibbu
+*** Underscore
+*** "ProcessingJS":http://processingjs.org/
+*** "EventJS":http://www.events-js.com/
+*** "SwipeJS":http://swipejs.com/
+*** "ListJS":http://listjs.com/
+*** "Reqwest":https://github.com/ded/Reqwest
+*** "MicroCache":https://github.com/jeromeetienne/microcache.js
+*** "JSSignals":http://millermedeiros.github.com/js-signals/
+*** "DraggableJS":http://gtramontina.github.com/draggable.js/
+*** Parsing - "JSON2":https://github.com/douglascrockford/JSON-js
+*** Pub/Sub - "RadioJS":http://radio.uxder.com/
+*** AppStructure  - "Extendjs":https://github.com/searls/extend.js
+*** Template - "DoT":https://github.com/olado/doT
+*** "StateMachine":https://github.com/jakesgordon/javascript-state-machine
+*** "DragAndDrop":http://kbjr.github.com/DragDrop/
+*** "JSDeferred":http://cho45.stfuawsc.com/jsdeferred/
+*** AppStructure - "Ancestry":https://github.com/jasonwyatt/ancestry.js
+*** Storage - "Lawnchair":http://brian.io/lawnchair/
+*** AppStructure/Threading - "PromiseJS":https://github.com/stackp/promisejs
+*** Threading - "Q":http://documentup.com/kriskowal/q/
+*** Application Structure  - "Hasher":https://github.com/millermedeiros/Hasher
+*** Application Structure  - "Crossroads":http://millermedeiros.github.com/crossroads.js/
+*** Rest - "Fermata":https://github.com/natevw/fermata
+*** "MicroSelector":https://github.com/fabiomcosta/micro-selector
+*** AppStructure - "DropinRequire":http://jeromeetienne.github.com/dropinrequire.js/
+*** AppStructure - "Bean":https://github.com/fat/bean
+*** "UglifyJS":https://github.com/mishoo/UglifyJS
+*** AppStructure - "StapeJS":http://hay.github.com/stapes/
+*** JazzHands - "Emile":https://github.com/madrobby/emile
