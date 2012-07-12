@@ -11,6 +11,34 @@ Using:
 @mvn archetype:generate -DarchetypeRepository=https://raw.github.com/driedtoast/kitchen-repo/master/snapshots -DarchetypeGroupId=org.driedtoast -DarchetypeArtifactId=ToastToAndroid  -DarchetypeVersion=1.0-SNAPSHOT@
 
 
+When success build, start your avd emulator and issue command 
+"*mvn install android:deploy*" 
+
+After install complete, issue another command 
+"*mvn android:run*" to start app 
+
+pre.. export ANDROID_SDK_HOME=${HOME}/android-sdk-macosx/ 
+ export PATH=$PATH:${ANDROID_SDK_HOME}/tools
+ mvn clean install android:deploy -Dandroid.sdk.path=${ANDROID_SDK_HOME} 
+ mvn android:run -Dandroid.sdk.path=${ANDROID_SDK_HOME}
+ android create avd -n avd22  -t 2
+ emulator  -avd avd22
+
+p.
+  
+Define value for property 'groupId': : your.group.id 
+Define value for property 'artifactId': : appName 
+Define value for property 'version':  1.0-SNAPSHOT: : 
+Define value for property 'package':  your.group.id: : 
+Define value for property 'CompanyDomain': : *cordova-web.appspot.com* (or 
+change to your web site domain) 
+Define value for property 'CompanyName': : YourCompanyName 
+Define value for property 'emulator_name': : avd22 
+Define value for property 'mobilePageEntryUrl': : /index 
+[INFO] Using property: platform = 8 
+Define value for property 'touchUrl': : /touch 
+
+
 h2. Direction
 
 A couple of things I want to do with this would be:
