@@ -28,6 +28,16 @@
       <name>Kent's Repository</name>
       <url>http://gwtrepo.googlecode.com/svn/repo</url>
     </repository>
+    <repository>
+        <id>kitchen-snapshots</id>
+        <url>https://github.com/driedtoast/kitchen-repo/raw/master/snapshots</url>
+    </repository>
+
+    <repository>
+        <id>kitchen-releases</id>
+        <url>https://github.com/driedtoast/kitchen-repo/raw/master/releases</url>
+    </repository>
+
   </repositories>
 
 	<dependencies>

@@ -6,4 +6,23 @@
   <version>1.0-SNAPSHOT</version>
   <name>Archetype - ToastToAndroid</name>
   <url>http://maven.apache.org</url>
+
+   
+ <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+ </properties>
+
+<distributionManagement>
+    <repository>
+        <id>repo</id>
+        <url>https://github.com/driedtoast/kitchen-repo/raw/master/releases</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshot-repo</id>
+        <url>https://github.com/driedtoast/kitchen-repo/raw/master/snapshots</url>
+    </snapshotRepository>
+</distributionManagement>
+
+
 </project>
